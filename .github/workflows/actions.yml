@@ -1,0 +1,25 @@
+# This action will be run on the `main` branch
+# or on any pull requests going into the `main` branch.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: test
+    # Only run in the `main` or `test` branch (i.e. not pull requests).
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: echo_main
+        if: github.ref == 'refs/heads/main'
+        run: echo "MAIN!!!"
+
+      - name: echo_test
+        if: github.ref == 'refs/heads/test'
+        run: echo "STAGING!!!"
