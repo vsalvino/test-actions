@@ -4,12 +4,14 @@ on:
   push:
     branches:
       - main
+      - test
   pull_request:
     branches:
       - main
+      - test
 jobs:
   deploy:
-    name: test
+    name: deploy
     # Only run in the `main` or `test` branch (i.e. not pull requests).
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test'
     runs-on: ubuntu-latest
